@@ -5,7 +5,8 @@ angular.module('saasApp', [])
             $http({
                 method:'GET',
                 url:'/'
-            }).success(function (data) {
+            }).then(function (data) {
+                console.log('Sucesso')
                 if (callback) callback(data)
             });
         }
@@ -15,7 +16,7 @@ angular.module('saasApp', [])
                 method:'POST',
                 url:'/',
                 data:JSON.stringify(hq)
-            }).success(function (data) {
+            }).then(function (data) {
                 if (callback) callback(data)
             });
         }
@@ -30,7 +31,8 @@ angular.module('saasApp', [])
         $scope.greeting = "Oi";
         saasService.listar(function(hqs) {
             $scope.hqs = hqs;
-        });
+            console.log(hqs);
+        })
 
         $scope.salvar = function(hq) {
             saasService.salvar(hq, function(hq) {
