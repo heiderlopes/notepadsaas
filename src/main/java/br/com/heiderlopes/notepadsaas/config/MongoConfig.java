@@ -40,9 +40,4 @@ public class MongoConfig extends AbstractMongoConfiguration {
         return new MongoClient(singletonList(new ServerAddress(mongoHost, mongoPort)),
                 singletonList(MongoCredential.createCredential(mongoUsername, mongoDB, mongoPassword.toCharArray())));
     }
-
-    @Override
-    protected String getMappingBasePackage() {
-        return "br.com.heiderlopes.JavaComMongo";
-    }
 }

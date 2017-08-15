@@ -2,15 +2,13 @@ package br.com.heiderlopes.notepadsaas.controller;
 
 import br.com.heiderlopes.notepadsaas.model.Nota;
 import br.com.heiderlopes.notepadsaas.repository.NotaRepository;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
+@RequestMapping(value = "/nota")
 public class NotaController {
 
     private NotaRepository notaRepository;
@@ -19,12 +17,17 @@ public class NotaController {
         this.notaRepository = notaRepository;
     }
 
-    @GetMapping(value = "/")
+    @GetMapping
     private List<Nota> findAll() {
         return notaRepository.findAll();
     }
 
-    @PostMapping(value = "/")
+    @GetMapping(value = "{titulo}")
+    private List<Nota> findByTitulo(@PathVariable(value = "titulo") String q) {
+        return notaRepository.findByTitulo(q);
+    }
+
+    @PostMapping
     private void save(@RequestBody Nota nota) {
         notaRepository.save(nota);
     }

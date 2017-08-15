@@ -4,9 +4,8 @@ angular.module('saasApp', [])
         function listar(callback) {
             $http({
                 method:'GET',
-                url:'/'
+                url:'/nota'
             }).then(function (data) {
-                console.log('Sucesso')
                 if (callback) callback(data)
             });
         }
@@ -14,7 +13,7 @@ angular.module('saasApp', [])
         function salvar(hq, callback) {
             $http({
                 method:'POST',
-                url:'/',
+                url:'/nota',
                 data:JSON.stringify(hq)
             }).then(function (data) {
                 if (callback) callback(data)
@@ -29,6 +28,7 @@ angular.module('saasApp', [])
     .controller('saasCtrl', ['$scope', 'saasService',function($scope, saasService) {
 
         $scope.greeting = "Oi";
+
         saasService.listar(function(hqs) {
             $scope.hqs = hqs;
             console.log(hqs);

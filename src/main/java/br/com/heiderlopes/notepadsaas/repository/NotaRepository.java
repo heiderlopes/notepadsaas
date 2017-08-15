@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.repository.Query;
 
 public interface NotaRepository extends MongoRepository<Nota, String> {
 
-    @Query("{}")
-    List<Nota> all();
+    List<Nota> findByTitulo(String titulo);
 
 }
