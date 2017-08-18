@@ -1,7 +1,7 @@
 package br.com.heiderlopes.notepadsaas.controller;
 
+import br.com.heiderlopes.notepadsaas.component.NotaComponent;
 import br.com.heiderlopes.notepadsaas.model.Nota;
-import br.com.heiderlopes.notepadsaas.repository.NotaRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,24 +11,29 @@ import java.util.List;
 @RequestMapping(value = "/nota")
 public class NotaController {
 
-    private NotaRepository notaRepository;
+    private NotaComponent notaComponent;
 
-    public NotaController(NotaRepository notaRepository) {
-        this.notaRepository = notaRepository;
+    public NotaController(NotaComponent notaComponent) {
+        this.notaComponent = notaComponent;
     }
 
     @GetMapping
     private List<Nota> findAll() {
-        return notaRepository.findAll();
+        return notaComponent.findAll();
     }
 
     @GetMapping(value = "{titulo}")
     private List<Nota> findByTitulo(@PathVariable(value = "titulo") String q) {
-        return notaRepository.findByTitulo(q);
+        return notaComponent.findByTitulo(q);
     }
 
     @PostMapping
     private void save(@RequestBody Nota nota) {
-        notaRepository.save(nota);
+        notaComponent.salvar(nota);
+    }
+
+    @DeleteMapping
+    private void deleteAll() {
+        notaComponent.deleteAll();
     }
 }
